@@ -336,16 +336,20 @@
     
     // Handling escape chars
     NSMutableString *data = [NSMutableString stringWithString : chunk];
-    [data replaceOccurrencesOfString   : @"\n"
-                            withString : @"\\n"
+    [data replaceOccurrencesOfString   : @"\r"
+                            withString : @""
                             options    : NSCaseInsensitiveSearch
                             range      : NSMakeRange(0, [data length])];
     
     // Relay to webview
-    NSString *receiveHook = [NSString stringWithFormat : @"window.receivedNMEA('%@', %d, '%@', '%@' );",
-                                host, port, [self buildKey : host : port], [NSString stringWithString : data]];
-    
-    [self.commandDelegate evalJs:receiveHook];
+	
+	NSArray *messages = [[NSString stringWithString: data] componentsSeparatedByString: @"\n"];
+	
+	for (NSString *msg in messages) {
+		
+		NSString *receiveHook = [NSString stringWithFormat : @"window.receivedNMEA('%@');", msg];
+		[self.commandDelegate evalJs:receiveHook];
+	}
 }
 
 @end
