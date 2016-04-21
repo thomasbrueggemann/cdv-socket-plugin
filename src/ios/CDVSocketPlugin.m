@@ -342,7 +342,7 @@
                             range      : NSMakeRange(0, [data length])];
     
     // Relay to webview
-    NSString *receiveHook = [NSString stringWithFormat : @"window.tlantic.plugins.socket.receive('%@', %d, '%@', '%@' );",
+    NSString *receiveHook = [NSString stringWithFormat : @"window.receivedNMEA('%@', %d, '%@', '%@' );",
                                 host, port, [self buildKey : host : port], [NSString stringWithString : data]];
     
     [self.commandDelegate evalJs:receiveHook];
