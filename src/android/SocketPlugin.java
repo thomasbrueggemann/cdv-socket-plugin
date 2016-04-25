@@ -271,7 +271,7 @@ public class SocketPlugin extends CordovaPlugin {
 	 * @param chunk
 	 */
 	public synchronized void sendMessage(String host, int port, String chunk) {
-		final String receiveHook = "window.tlantic.plugins.socket.receive(\"" + host + "\"," + port + ",\"" + this.buildKey(host, port) + "\",\"" + chunk.replace("\"", "\\\"") + "\");";
+		final String receiveHook = "window.receivedNMEA(\"" + chunk.replace("\"", "\\\"") + "\");";
 		
 		cordova.getActivity().runOnUiThread(new Runnable() {
 
