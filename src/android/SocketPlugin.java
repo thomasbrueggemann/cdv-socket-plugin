@@ -275,7 +275,7 @@ public class SocketPlugin extends CordovaPlugin {
 		String[] parts = chunk.split("\n");
 		
 		for(String part : parts) {
-			final String receiveHook = "window.receivedNMEA(\"" + part.replace("\"", "\\\"") + "\");";
+			String receiveHook = "window.receivedNMEA(\"" + part.replace("\"", "\\\"") + "\");";
 			
 			cordova.getActivity().runOnUiThread(new Runnable() {
 	
